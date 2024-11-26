@@ -9,6 +9,10 @@ let minHeight;
 let maxHeight;
 let rectWidth;
 let rectHeight;
+let currentBgColor;
+let targetBgColor;
+
+const easing = 0.005;
 
 let red = [206, 29, 29];
 let blue = [21, 33, 173];
@@ -520,6 +524,9 @@ let fourthBuilding;
   function setup() {
     createCanvas(windowWidth, windowHeight);
     noStroke();
+
+    currentBgColor = color(255);
+    targetBgColor = color(0);
   
     // Calculate the start positions and widths for the second, third, and fourth segments
     secondSegStart = width / 4;  
@@ -541,7 +548,7 @@ let fourthBuilding;
   }
 
   function draw() {
-    background(220);
+    background(currentBgColor);
 
     if (frameCount > 40 && Layer < 1) {
       Layer = 1;
@@ -610,6 +617,7 @@ let fourthBuilding;
     fillColour("yellow");
     rect(0, height-rectHeight*2, width, rectHeight*2);
 
+    currentBgColor = lerpColor(currentBgColor, targetBgColor, easing);
   }
 
   function windowResized() {
